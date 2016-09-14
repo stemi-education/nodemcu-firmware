@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WiFi menu</title>
+  <link rel="icon" href="favicon.png"></link>
+  <link rel="stylesheet" href="min.min.css"></link>
+</head>
+<body>
+  <nav class="nav" tabindex="-1" onclick="this.focus()">
+    <div class="container">
+        <a class="pagename" href="index.html">STEMI</a>
+        <a class="current" href="wifimenu.html">Connect to other WiFi network</a>
+    </div>
+  </nav>
+  <button class="btn-close btn btn-sm">x</button>
+
+  <div class="container" id="content">
+    <h1>Connect STEMI to other WiFi network</h1>
+
+    <div id="wifimenu">
+      <div class="msg">
+        <strong>
+          STEMI WiFi chip has its own WiFi network by default, but it can be useful
+          to connect it to the home router.
+        </strong>
+        <p>
+          This way a smartphone or a PC can be connected to the internet, as well
+          as the STEMI hexapod.To connect your robot to the home router,
+          enter the network SSID and Password.
+        </p>
+      </div>
+
+      <p><span class="addon">SSID</span><input class="smooth" type="text" name="ssid"></p>
+
+      <p><span class="addon">Password</span><input type="password" name="password"></p>
+
+      <p><input class="btn btn-b btn-sm smooth" type="submit" onClick="connectToOtherWifi()" value="Connect"></p>
+
+      <div class="msg">
+        <strong>Disconnect!</strong>
+        <p>If you are already connected to your home router, you may disconnect via button below:</p>
+      </div>
+
+      <p><input class="btn btn-c btn-sm smooth" type="submit" value=Disconnect onClick="disconnect()"></p>
+    </div>
+
+    <div class="msg" id="wificonnect" style="display: none">
+        <p>Trying to connect to the network <strong id="network-name"></strong>.</p>
+        <p>To try again refresh this page.</p>
+        <strong>If the connection is successful, you need to find the new IP of the STEMI
+           hexapod on the new network. This can tipically be found through the web
+           interface of your router.</strong>
+        <strong>To revert back to AP mode, find the new IP address, connect with the browser and click
+                the disconnect button, or restart your robot.</strong>
+    </div>
+
+    <div class="msg" id="wifidisconnect" style="display: none">
+      <strong>Trying to disconnect from the router and establish STEMI's own WiFi network.</strong>
+      <p>Alternatively, you can restart the STEMI hexapod.</p>
+    </div>
+
+    <script>
+      function connectToOtherWifi() {
+        var password = document.getElementsByName('password')[0].value;
+        var ssid = document.getElementsByName('ssid')[0].value;
+
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.timeout = 50;
+        xmlHttp.open('GET', 'connect?ssid=' + btoa(ssid) + '&password=' + btoa(password), true);
+        xmlHttp.send(null);
+
+        var content = document.getElementById('wifimenu');
+        var network_name = document.getElementById('network-name');
+        var wificonnect = document.getElementById('wificonnect');
+
+        content.style.display = 'none';
+        network_name.innerText = ssid;
+        wificonnect.style.display = 'block';
+      }
+
+      function disconnect() {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.timeout = 50;
+        xmlHttp.open('GET', 'disconnect', true);
+        xmlHttp.send(null);
+
+        var content = document.getElementById('wifimenu');
+        var wifidisconnect = document.getElementById('wifidisconnect');
+
+        content.style.display = 'none';
+        wifidisconnect.style.display = 'block';
+      }
+    </script>
+
+  </div>
+</body>
+</html>

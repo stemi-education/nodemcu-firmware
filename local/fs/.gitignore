@@ -2,3 +2,12 @@
 *
 # But not this file itself.
 !.gitignore
+# And sources for STEMI hexapod :)
+!favicon.png
+!index.html
+!init.lua
+!linearization.bin
+!main.lua
+!min.min.css
+!weblogo.png
+!wifimenu.html
