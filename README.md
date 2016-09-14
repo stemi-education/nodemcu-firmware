@@ -1,4 +1,7 @@
-# **NodeMCU 1.5.4.1** #
+# **NodeMCU 1.5.4.1 - firmware for STEMI hexapod** #
+
+This fork is adjusted for building the firmware of ESP-12F placed on (STEMI hexapod)[https://www.stemi.education] robot.
+To see detailed building and flashing instructions go to [https://github.com/stemi-education/esp-stemi-firmware.git].
 
 [![Join the chat at https://gitter.im/nodemcu/nodemcu-firmware](https://img.shields.io/gitter/room/badges/shields.svg)](https://gitter.im/nodemcu/nodemcu-firmware?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/nodemcu/nodemcu-firmware.svg)](https://travis-ci.org/nodemcu/nodemcu-firmware)
